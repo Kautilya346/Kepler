@@ -1,0 +1,39 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider     = "prisma-client-js"
+  moduleFormat = "cjs"
+}
+
+model Workflow {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  definition  Json     // Holds nodes and edges
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  runs        Run[]
+}
+
+model Run {
+  id          String    @id @default(uuid())
+  workflowId  String
+  workflow    Workflow  @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  status      String    // PENDING, RUNNING, COMPLETED, FAILED
+  nodesState  Json      // Map of nodeId -> status
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+  events      Event[]
+}
+
+model Event {
+  id        String   @id @default(uuid())
+  runId     String
+  run       Run      @relation(fields: [runId], references: [id], onDelete: Cascade)
+  type      String   // RUN_STARTED, NODE_STARTED, NODE_COMPLETED, NODE_FAILED, RUN_COMPLETED, RUN_FAILED
+  nodeId    String?
+  message   String
+  timestamp DateTime @default(now())
+}

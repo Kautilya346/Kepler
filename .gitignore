@@ -1,0 +1,51 @@
+# Dependency Folders
+node_modules/
+**/node_modules/
+
+# Local Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+**/.env
+
+# Build Output Directories
+dist/
+**/dist/
+build/
+**/build/
+out/
+**/out/
+
+# TypeScript Build Cache
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# Logs & Temporary Files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+**/*.log
+
+# T-Clone Worker Storage logs (Avoid committing filesystem activity logs)
+Backend/workers/storage/
+**/storage/
+
+# IDE / Editor Settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.gemini/
+.agents/
+
+# OS Metadata
+.DS_Store
+Thumbs.db

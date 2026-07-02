@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-main: #131314;
+  --bg-surface: #1e1f20;
+  --bg-card: rgba(30, 31, 32, 0.7);
+  --border-color: #3c4043;
+  --border-color-glow: rgba(138, 180, 248, 0.4);
+  
+  --color-primary: #8ab4f8;
+  --color-primary-hover: #a8c7fa;
+  --color-text: #e3e3e3;
+  --color-text-secondary: #c4c7c5;
+  
+  --color-success: #81c995;
+  --color-error: #f28b82;
+  --color-warning: #fdd663;
+  --color-pending: #9aa0a6;
+  
+  --shadow-neon: 0 0 15px rgba(138, 180, 248, 0.25);
+  --shadow-success: 0 0 15px rgba(129, 201, 149, 0.25);
+  --shadow-error: 0 0 15px rgba(242, 139, 130, 0.25);
+  --shadow-warning: 0 0 15px rgba(253, 214, 99, 0.25);
+  
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color-scheme: dark;
+  background-color: var(--bg-main);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-main);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Premium Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Glassmorphism Classes */
+.glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
+/* Page Transitions and Animations */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(138, 180, 248, 0.2); }
+  50% { box-shadow: 0 0 25px rgba(138, 180, 248, 0.6); }
+}
+
+@keyframes pulseBorderSuccess {
+  0%, 100% { border-color: rgba(129, 201, 149, 0.4); box-shadow: 0 0 10px rgba(129, 201, 149, 0.2); }
+  50% { border-color: var(--color-success); box-shadow: 0 0 20px rgba(129, 201, 149, 0.5); }
+}
+
+@keyframes pulseBorderRunning {
+  0%, 100% { border-color: rgba(138, 180, 248, 0.4); box-shadow: 0 0 10px rgba(138, 180, 248, 0.2); }
+  50% { border-color: var(--color-primary); box-shadow: 0 0 20px rgba(138, 180, 248, 0.5); }
+}
+
+@keyframes pulseBorderError {
+  0%, 100% { border-color: rgba(242, 139, 130, 0.4); box-shadow: 0 0 10px rgba(242, 139, 130, 0.2); }
+  50% { border-color: var(--color-error); box-shadow: 0 0 20px rgba(242, 139, 130, 0.5); }
+}
+
+/* custom React Flow Nodes styling */
+.rf-node-base {
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 160px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+.rf-node-base:hover {
+  border-color: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.rf-node-trigger {
+  border-left: 5px solid #8ab4f8; /* Google Pastel Blue */
+}
+
+.rf-node-activity {
+  border-left: 5px solid #81c995; /* Google Pastel Green */
+}
+
+.rf-node-webhook {
+  border-left: 5px solid #c5a5eb; /* Google Pastel Purple */
+}
+
+.rf-node-cron {
+  border-left: 5px solid #fdd663; /* Google Pastel Yellow */
+}
+
+/* Custom Telemetry Nodes state indicators */
+.node-pending {
+  border-color: var(--border-color);
+  opacity: 0.65;
+}
+
+.node-running {
+  animation: pulseBorderRunning 1.5s infinite;
+}
+
+.node-completed {
+  border-color: var(--color-success);
+  box-shadow: var(--shadow-success);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.node-failed {
+  animation: pulseBorderError 1.5s infinite;
+  background: rgba(244, 63, 94, 0.05);
+}
+
+/* Confetti trigger overlay option */
+.celebrate-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--color-success);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-success);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Custom Grid backgrounds for canvases */
+.react-flow__background {
+  background: var(--bg-main) !important;
+}
+
+.react-flow__handle {
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--color-primary) !important;
+  border: 1px solid var(--bg-main) !important;
+}
+
+.react-flow__edge-path {
+  stroke: var(--color-text-secondary) !important;
+  stroke-width: 2 !important;
+  opacity: 0.4;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--color-primary) !important;
+  opacity: 0.9;
+}
