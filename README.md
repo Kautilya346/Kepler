@@ -1,6 +1,6 @@
-# T-Clone: Durable Workflow Orchestration Engine
+# Kepler: Durable Workflow Orchestration Engine
 
-T-Clone is a production-grade, durable workflow orchestration platform designed to run fault-tolerant background execution pipelines. Inspired by the core architectures of **Temporal**, it features a visual designer, real-time WebSocket telemetry monitoring, per-node retry loops, conditional branching, parent-child sub-workflows, and deterministic state reconstruction via Event Sourcing.
+Kepler is a production-grade, durable workflow orchestration platform designed to run fault-tolerant background execution pipelines. Inspired by the core architectures of **Temporal**, it features a visual designer, real-time WebSocket telemetry monitoring, per-node retry loops, conditional branching, parent-child sub-workflows, and deterministic state reconstruction via Event Sourcing.
 
 ---
 
@@ -8,7 +8,7 @@ T-Clone is a production-grade, durable workflow orchestration platform designed 
 * **Execution & Server Runtimes**: Node.js v20+ with TypeScript compiled to CommonJS modules.
 * **API Gateway & Routing**: Express.js with custom rate-limiting middleware, CORS configurations, JWT Authentication handshakes, and unauthenticated public endpoints.
 * **WebSocket Streams**: Native Node.js `ws` server upgrading standard HTTP handshakes to secure JSON telemetry broadcasts.
-* **Durable Database Persistence**: PostgreSQL database (running on port `5432` under Database `T-Clone`) + Prisma ORM v7 client wrapper.
+* **Durable Database Persistence**: PostgreSQL database (running on port `5432` under Database `Kepler`) + Prisma ORM v7 client wrapper.
 * **Durable Task Queuing & Timing**: Redis (port `6379`, running in a Docker container `redis-server`) + **BullMQ** for distributed queues, delayed job re-queuing, and repeatable cron jobs.
 * **Frontend Visual Dashboard**: Vite + React Flow canvas designer + custom Google I/O Dark Theme Vanilla CSS (`#131314` charcoal background, `#1e1f20` surface panels, `#3c4043` borders).
 
@@ -17,7 +17,7 @@ T-Clone is a production-grade, durable workflow orchestration platform designed 
 ## 📁 2. Directory Structure & Code Layout
 
 ```text
-T-Clone/
+Kepler/
 ├── Backend/
 │   ├── api-gateway/            # Express Gateway Service
 │   │   ├── prisma/             # Schema definitions & migrations
@@ -65,7 +65,7 @@ T-Clone/
 
 ## 🗄️ 3. Database Schema Definitions (`schema.prisma`)
 
-T-Clone implements event sourcing by persisting workflow definitions, execution run instances, and immutable event logs in PostgreSQL:
+Kepler implements event sourcing by persisting workflow definitions, execution run instances, and immutable event logs in PostgreSQL:
 
 ```prisma
 model Workflow {
@@ -213,7 +213,7 @@ If an activity throws an exception, the worker checks the node's retry policies:
 
 ## 🧪 8. E2E Verification Test Suites
 
-T-Clone includes comprehensive automated E2E test scripts inside `/scratch`:
+Kepler includes comprehensive automated E2E test scripts inside `/scratch`:
 1. **`client-test.js`**: Registers workflows, triggers manual executions, connects to the WebSocket stream, and verifies cycle-rejection rules.
 2. **`test-custom-workers.js`**: Validates pipeline integrations (File logs, HTTP triggers, Gemini AI prompts) and asserts variable substitutions.
 3. **`test-conditional-retries.js`**: Asserts condition expression matching, skipped status cascades, and exponential retry backoff loops.
